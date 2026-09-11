@@ -258,40 +258,47 @@ async function main() {
   console.log('index.html 생성 완료!');
 }
 
-function listBlock(title, icon, items) {
+function stripLeadingEmoji(t) {
+  return t.replace(/^\S+\s?/, (m) => (/^\p{Extended_Pictographic}/u.test(m) ? '' : m));
+}
+
+function listSection(title, items) {
   if (!items || items.length === 0) return '';
   const lis = items
-    .map((t) => `<li>${esc(t.replace(/^\S+\s?/, (m) => (/^\p{Extended_Pictographic}/u.test(m) ? '' : m)))}</li>`)
-    .join('\n            ');
+    .map((t) => `<li>${esc(stripLeadingEmoji(t))}</li>`)
+    .join('\n        ');
   return `
-      <section class="card">
-        <h2><span class="icon">${icon}</span>${esc(title)}</h2>
-        <ul class="list">
-            ${lis}
-        </ul>
-      </section>`;
+    <section class="section">
+      <h2>${esc(title)}</h2>
+      <ul class="plain-list">
+        ${lis}
+      </ul>
+    </section>`;
 }
 
 function renderHTML(d) {
   const name = d.personLine
-    ? esc(d.personLine.replace(/^🙋[^\s]*\s?/, ''))
+    ? esc(stripLeadingEmoji(d.personLine))
     : '포트폴리오';
+  // "김현영(화학 교사)" -> 이름과 역할 분리
+  const match = name.match(/^([^(]+)\(([^)]+)\)\s*$/);
+  const displayName = match ? match[1].trim() : name;
+  const role = match ? match[2].trim() : '';
 
   const toolsHTML = d.tools.length
     ? `
-      <section class="card">
-        <h2><span class="icon">💻</span>에듀테크 연구</h2>
-        <div class="tools-grid">
-          ${d.tools
-            .map(
-              (t) => `
-          <a class="tool-chip" href="${t.url ? esc(t.url) : '#'}" target="_blank" rel="noopener">
-            ${esc(t.name)}
-          </a>`
-            )
-            .join('')}
-        </div>
-      </section>`
+    <section class="section">
+      <h2>${esc('에듀테크 연구')}</h2>
+      <p class="tools-line">
+        ${d.tools
+          .map((t) =>
+            t.url
+              ? `<a href="${esc(t.url)}" target="_blank" rel="noopener">${esc(t.name)}</a>`
+              : `<span>${esc(t.name)}</span>`
+          )
+          .join('<span class="dot">·</span>')}
+      </p>
+    </section>`
     : '';
 
   return `<!DOCTYPE html>
@@ -300,182 +307,165 @@ function renderHTML(d) {
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>${esc(d.pageTitle)}</title>
+<meta name="description" content="${esc(d.introText).slice(0, 140)}" />
 <link rel="preconnect" href="https://cdn.jsdelivr.net" />
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css" />
 <style>
   :root {
-    --bg: #FBF9F6;
-    --card: #FFFFFF;
-    --ink: #2B2622;
-    --sub: #746B62;
-    --accent: #E4785C;
-    --accent-soft: #FCE7DF;
-    --teal: #3E7C74;
-    --teal-soft: #E2F0ED;
-    --line: #EEE7DE;
-    --radius: 20px;
+    --bg: #FAFAF7;
+    --ink: #1B1B18;
+    --sub: #8B8B83;
+    --accent: #2F6F5E;
+    --line: #E4E1D8;
   }
   * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
   body {
     margin: 0;
     font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
     background: var(--bg);
     color: var(--ink);
-    line-height: 1.7;
+    line-height: 1.75;
+    -webkit-font-smoothing: antialiased;
   }
-  .hero {
-    position: relative;
-    padding: 0 0 60px;
-  }
-  .cover {
-    width: 100%;
-    height: 220px;
-    object-fit: cover;
-    background: linear-gradient(135deg, var(--teal-soft), var(--accent-soft));
-  }
-  .hero-inner {
-    max-width: 880px;
-    margin: -70px auto 0;
-    padding: 0 24px;
-    display: flex;
-    gap: 28px;
-    align-items: flex-end;
-    flex-wrap: wrap;
-  }
-  .avatar {
-    width: 140px;
-    height: 140px;
-    border-radius: 50%;
-    object-fit: cover;
-    border: 6px solid var(--bg);
-    background: var(--card);
-    box-shadow: 0 8px 24px rgba(0,0,0,0.08);
-  }
-  .hero-text { padding-bottom: 8px; }
-  .hero-text h1 {
-    margin: 0 0 6px;
-    font-size: 30px;
-    font-weight: 800;
-  }
-  .hero-text .icon-badge { font-size: 26px; margin-right: 6px; }
-  .contact-row {
-    display: flex;
-    gap: 14px;
-    flex-wrap: wrap;
-    margin-top: 10px;
-  }
-  .contact-row a, .contact-row span {
-    font-size: 14px;
-    color: var(--sub);
-    text-decoration: none;
-    background: var(--card);
-    padding: 6px 14px;
-    border-radius: 999px;
-    border: 1px solid var(--line);
-  }
-  .contact-row a:hover { border-color: var(--accent); color: var(--accent); }
-
   main {
-    max-width: 880px;
+    max-width: 640px;
     margin: 0 auto;
-    padding: 0 24px 80px;
-    display: flex;
-    flex-direction: column;
-    gap: 24px;
+    padding: 96px 28px 120px;
   }
-  .intro-callout {
-    background: var(--teal-soft);
-    color: var(--teal);
-    border-radius: var(--radius);
-    padding: 22px 26px;
-    font-size: 16px;
-    font-weight: 500;
-  }
-  .quote-box {
-    border-left: 4px solid var(--accent);
-    background: var(--accent-soft);
-    border-radius: 0 var(--radius) var(--radius) 0;
-    padding: 18px 24px;
-    font-size: 15px;
-    color: #8A4A34;
-    font-weight: 600;
-  }
-  .card {
-    background: var(--card);
-    border-radius: var(--radius);
-    padding: 28px 30px;
-    border: 1px solid var(--line);
-  }
-  .card h2 {
-    margin: 0 0 16px;
-    font-size: 18px;
-    font-weight: 700;
+
+  .hero {
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 24px;
+    margin-bottom: 56px;
   }
-  .card h2 .icon { font-size: 20px; }
-  .list {
-    margin: 0;
-    padding-left: 20px;
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    font-size: 14.5px;
-    color: var(--ink);
+  .avatar {
+    width: 96px;
+    height: 96px;
+    border-radius: 14px;
+    object-fit: cover;
+    flex-shrink: 0;
+    background: var(--line);
   }
-  .list li { padding-left: 2px; }
-  .tools-grid {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
+  .hero h1 {
+    margin: 0 0 6px;
+    font-size: 32px;
+    font-weight: 700;
+    letter-spacing: -0.01em;
   }
-  .tool-chip {
-    background: var(--teal-soft);
-    color: var(--teal);
-    padding: 8px 16px;
-    border-radius: 999px;
-    font-size: 14px;
-    font-weight: 600;
-    text-decoration: none;
-  }
-  .tool-chip:hover { background: var(--teal); color: #fff; }
-  footer {
-    text-align: center;
-    padding: 30px 0 50px;
-    font-size: 13px;
+  .hero .role {
+    margin: 0 0 12px;
+    font-size: 15px;
     color: var(--sub);
   }
-  @media (max-width: 520px) {
-    .hero-inner { flex-direction: column; align-items: flex-start; }
-    .avatar { width: 110px; height: 110px; }
-    .hero-text h1 { font-size: 24px; }
+  .contact-line {
+    font-size: 14px;
+    color: var(--sub);
+  }
+  .contact-line a {
+    color: var(--sub);
+    text-decoration: none;
+    border-bottom: 1px solid var(--line);
+  }
+  .contact-line a:hover { color: var(--accent); border-color: var(--accent); }
+  .contact-line .dot { margin: 0 10px; color: var(--line); }
+
+  .intro {
+    font-size: 17px;
+    color: var(--ink);
+    margin: 0 0 20px;
+    padding-left: 16px;
+    border-left: 2px solid var(--accent);
+  }
+  .values {
+    font-size: 14px;
+    color: var(--sub);
+    margin: 0 0 64px;
+    padding-left: 16px;
+  }
+
+  .section {
+    padding-top: 40px;
+    margin-top: 40px;
+    border-top: 1px solid var(--line);
+  }
+  .section:first-of-type { border-top: none; margin-top: 0; padding-top: 0; }
+  .section h2 {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--accent);
+    margin: 0 0 18px;
+    letter-spacing: 0.02em;
+  }
+  .plain-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .plain-list li {
+    font-size: 15px;
+    color: var(--ink);
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--line);
+  }
+  .plain-list li:last-child { border-bottom: none; padding-bottom: 0; }
+
+  .tools-line {
+    font-size: 15px;
+    line-height: 2.1;
+    margin: 0;
+  }
+  .tools-line a {
+    color: var(--ink);
+    text-decoration: none;
+    border-bottom: 1px solid var(--line);
+  }
+  .tools-line a:hover { color: var(--accent); border-color: var(--accent); }
+  .tools-line span:not(.dot) { color: var(--sub); }
+  .tools-line .dot { margin: 0 10px; color: var(--line); }
+
+  footer {
+    max-width: 640px;
+    margin: 0 auto;
+    padding: 0 28px 60px;
+    font-size: 12px;
+    color: var(--sub);
+  }
+
+  @media (max-width: 480px) {
+    main { padding: 64px 20px 90px; }
+    .hero { gap: 16px; margin-bottom: 44px; }
+    .avatar { width: 76px; height: 76px; border-radius: 12px; }
+    .hero h1 { font-size: 26px; }
   }
 </style>
 </head>
 <body>
-  <div class="hero">
-    ${d.coverPath ? `<img class="cover" src="${esc(d.coverPath)}" alt="cover" />` : `<div class="cover"></div>`}
-    <div class="hero-inner">
+  <main>
+    <div class="hero">
       ${d.profileImagePath ? `<img class="avatar" src="${esc(d.profileImagePath)}" alt="profile" />` : ''}
-      <div class="hero-text">
-        <h1><span class="icon-badge">${esc(d.pageIcon)}</span>${name}</h1>
-        <div class="contact-row">
-          ${d.emailLine ? `<a href="mailto:${esc(d.emailLine)}">✉️ ${esc(d.emailLine)}</a>` : ''}
-          ${d.blogUrl ? `<a href="${esc(d.blogUrl)}" target="_blank" rel="noopener">📎 ${esc(d.blogLabel || '블로그')}</a>` : ''}
-        </div>
+      <div>
+        <h1>${displayName}</h1>
+        ${role ? `<p class="role">${esc(role)}</p>` : ''}
+        <p class="contact-line">
+          ${d.emailLine ? `<a href="mailto:${esc(d.emailLine)}">${esc(d.emailLine)}</a>` : ''}
+          ${d.emailLine && d.blogUrl ? `<span class="dot">·</span>` : ''}
+          ${d.blogUrl ? `<a href="${esc(d.blogUrl)}" target="_blank" rel="noopener">${esc(d.blogLabel || '블로그')}</a>` : ''}
+        </p>
       </div>
     </div>
-  </div>
 
-  <main>
-    ${d.introText ? `<div class="intro-callout">💡 ${esc(d.introText)}</div>` : ''}
-    ${d.valuesText ? `<div class="quote-box">${esc(d.valuesText)}</div>` : ''}
+    ${d.introText ? `<p class="intro">${esc(d.introText)}</p>` : ''}
+    ${d.valuesText ? `<p class="values">${esc(d.valuesText)}</p>` : ''}
 
-    ${listBlock(d.sectionTitles.award, '🏆', d.sections.award)}
-    ${listBlock(d.sectionTitles.leader, '🙋🏻\u200d♀️', d.sections.leader)}
-    ${listBlock(d.sectionTitles.community, '📒', d.sections.community)}
-    ${listBlock(d.sectionTitles.lecture, '🎤', d.sections.lecture)}
+    ${listSection(d.sectionTitles.award, d.sections.award)}
+    ${listSection(d.sectionTitles.leader, d.sections.leader)}
+    ${listSection(d.sectionTitles.community, d.sections.community)}
+    ${listSection(d.sectionTitles.lecture, d.sections.lecture)}
     ${toolsHTML}
   </main>
 
