@@ -1,0 +1,641 @@
+<title>해달쌤 프로필</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Jua&family=Gowun+Dodum&family=Space+Mono:wght@400;700&display=swap">
+<style>
+  :root{
+    /* ---- light: 물속 실험실 ---- */
+    --bg:#EAF7F5;
+    --bg-2:#F5FCFB;
+    --surface:#FFFFFF;
+    --surface-2:#F0FAF8;
+    --ink:#123536;
+    --ink-soft:#4C6B69;
+    --ink-faint:#7E9997;
+    --line:#D2E9E5;
+    --aqua:#0EA5A0;
+    --aqua-deep:#0B7C78;
+    --aqua-glow:rgba(14,165,160,.16);
+    --coral:#FF7A59;
+    --coral-deep:#E8542F;
+    --sun:#FFC24B;
+    --otter:#8B5E3C;
+    --kelp:#3DA35D;
+    --card-shadow:0 14px 34px -18px rgba(11,124,120,.45);
+    --card-shadow-hi:0 22px 48px -18px rgba(11,124,120,.55);
+    --sky-1:#CDEFEA;
+    --sky-2:#EAF7F5;
+    --ring:rgba(14,165,160,.55);
+  }
+  :root:not([data-theme="light"]){}
+  @media (prefers-color-scheme:dark){
+    :root:not([data-theme="light"]){
+      --bg:#05252A;
+      --bg-2:#0A3238;
+      --surface:#0D3940;
+      --surface-2:#0A3037;
+      --ink:#E7F6F3;
+      --ink-soft:#A6CCC7;
+      --ink-faint:#6E958F;
+      --line:#164048;
+      --aqua:#2DD4BF;
+      --aqua-deep:#5EEAD4;
+      --aqua-glow:rgba(45,212,191,.20);
+      --coral:#FF8A6B;
+      --coral-deep:#FF7A59;
+      --sun:#FFD277;
+      --otter:#C89B76;
+      --kelp:#5CC47C;
+      --card-shadow:0 16px 40px -20px rgba(0,0,0,.7);
+      --card-shadow-hi:0 24px 54px -18px rgba(0,0,0,.78);
+      --sky-1:#0A3238;
+      --sky-2:#05252A;
+      --ring:rgba(45,212,191,.6);
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg:#05252A;
+    --bg-2:#0A3238;
+    --surface:#0D3940;
+    --surface-2:#0A3037;
+    --ink:#E7F6F3;
+    --ink-soft:#A6CCC7;
+    --ink-faint:#6E958F;
+    --line:#164048;
+    --aqua:#2DD4BF;
+    --aqua-deep:#5EEAD4;
+    --aqua-glow:rgba(45,212,191,.20);
+    --coral:#FF8A6B;
+    --coral-deep:#FF7A59;
+    --sun:#FFD277;
+    --otter:#C89B76;
+    --kelp:#5CC47C;
+    --card-shadow:0 16px 40px -20px rgba(0,0,0,.7);
+    --card-shadow-hi:0 24px 54px -18px rgba(0,0,0,.78);
+    --sky-1:#0A3238;
+    --sky-2:#05252A;
+    --ring:rgba(45,212,191,.6);
+  }
+
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--ink);
+    font-family:"Gowun Dodum","Apple SD Gothic Neo","Malgun Gothic",sans-serif;
+    line-height:1.75;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+    word-break:keep-all;
+    overflow-wrap:break-word;
+  }
+  h1,h2,h3,.disp{font-family:"Jua","Apple SD Gothic Neo",sans-serif;font-weight:400;letter-spacing:.2px}
+  .mono{font-family:"Space Mono",ui-monospace,monospace}
+  a{color:inherit}
+  ::selection{background:var(--aqua-glow)}
+
+  .wrap{max-width:1060px;margin:0 auto;padding-inline:20px}
+  .eyebrow{
+    font-family:"Space Mono",monospace;font-size:.72rem;font-weight:700;
+    letter-spacing:.28em;text-transform:uppercase;color:var(--aqua-deep);
+    display:inline-flex;align-items:center;gap:.55em;
+  }
+  .eyebrow::before{content:"";width:26px;height:2px;background:var(--aqua);border-radius:2px;display:inline-block}
+
+  /* ---------- top bar ---------- */
+  .topbar{
+    position:sticky;top:0;z-index:40;
+    backdrop-filter:blur(10px);
+    background:color-mix(in srgb,var(--bg) 78%,transparent);
+    border-bottom:1px solid var(--line);
+  }
+  .topbar .row{display:flex;align-items:center;justify-content:space-between;padding-block:12px}
+  .brand{display:flex;align-items:center;gap:10px;font-family:"Jua",sans-serif;font-size:1.15rem}
+  .brand .dot{width:32px;height:32px;border-radius:50%;
+    background:radial-gradient(circle at 35% 30%,var(--sun),var(--coral) 78%);
+    box-shadow:0 4px 12px -4px var(--coral-deep);flex:none;
+    display:grid;place-items:center;font-size:1rem;line-height:1}
+  .nav{display:flex;gap:6px;align-items:center}
+  .nav a{
+    font-size:.86rem;color:var(--ink-soft);text-decoration:none;
+    padding:7px 12px;border-radius:999px;transition:.2s;
+  }
+  .nav a:hover{color:var(--aqua-deep);background:var(--surface-2)}
+  .theme-btn{
+    border:1px solid var(--line);background:var(--surface);color:var(--ink);
+    width:40px;height:40px;border-radius:50%;cursor:pointer;font-size:1.1rem;
+    display:grid;place-items:center;transition:.25s;flex:none;
+  }
+  .theme-btn:hover{transform:rotate(-12deg) scale(1.06);border-color:var(--aqua)}
+  @media(max-width:640px){.nav a:not(.hide-sm){display:none}}
+
+  /* ---------- hero ---------- */
+  .hero{position:relative;overflow:hidden}
+  .hero-canvas{position:absolute;inset:0;width:100%;height:100%;z-index:0;pointer-events:none}
+  .hero-bg{
+    position:absolute;inset:0;z-index:0;
+    background:
+      radial-gradient(120% 90% at 80% -10%,var(--sky-1),transparent 60%),
+      linear-gradient(180deg,var(--bg-2),var(--bg));
+  }
+  .hero .wrap{position:relative;z-index:2;
+    display:grid;grid-template-columns:1.15fr .85fr;gap:34px;align-items:center;
+    padding-block:64px 72px}
+  @media(max-width:820px){.hero .wrap{grid-template-columns:1fr;text-align:left;gap:12px;padding-block:40px 52px}}
+  .hero h1{
+    font-size:clamp(2.5rem,7vw,4.4rem);line-height:1.06;margin:.5rem 0 .2rem;
+    text-wrap:balance;
+  }
+  .hero h1 .hl{color:var(--aqua-deep);position:relative;white-space:nowrap}
+  .hero h1 .hl::after{
+    content:"";position:absolute;left:-2%;right:-2%;bottom:.06em;height:.34em;z-index:-1;
+    background:var(--sun);opacity:.55;border-radius:4px;transform:rotate(-1deg);
+  }
+  .hero .role{font-family:"Space Mono",monospace;font-size:.82rem;letter-spacing:.2em;
+    color:var(--coral-deep);text-transform:uppercase;font-weight:700}
+  .hero .lead{color:var(--ink-soft);font-size:1.06rem;max-width:34ch;margin:14px 0 22px}
+  .hero .cta{display:flex;gap:12px;flex-wrap:wrap}
+  .btn{
+    display:inline-flex;align-items:center;gap:8px;cursor:pointer;
+    padding:12px 20px;border-radius:999px;font-family:"Jua",sans-serif;font-size:1rem;
+    text-decoration:none;border:1.5px solid transparent;transition:.22s;
+  }
+  .btn.primary{background:var(--aqua);color:#fff;box-shadow:0 10px 24px -10px var(--aqua-deep)}
+  .btn.primary:hover{transform:translateY(-3px);box-shadow:0 16px 30px -12px var(--aqua-deep)}
+  .btn.ghost{border-color:var(--line);color:var(--ink);background:var(--surface)}
+  .btn.ghost:hover{border-color:var(--coral);color:var(--coral-deep);transform:translateY(-3px)}
+
+  /* otter figure */
+  .otter-stage{position:relative;justify-self:center;width:min(340px,80vw);aspect-ratio:1/1}
+  .otter-stage svg{width:100%;height:100%;overflow:visible;
+    animation:bob 5.5s ease-in-out infinite}
+  .otter-ring{
+    position:absolute;inset:6%;border-radius:50%;z-index:-1;
+    background:radial-gradient(circle,var(--aqua-glow),transparent 68%);
+  }
+  @keyframes bob{0%,100%{transform:translateY(0) rotate(-1.5deg)}50%{transform:translateY(-16px) rotate(1.5deg)}}
+  .ripple{position:absolute;left:50%;bottom:2%;width:70%;height:26px;transform:translateX(-50%);
+    border-radius:50%;border:2px solid var(--aqua);opacity:.4;
+    animation:ripple 4s ease-out infinite}
+  .ripple.d{animation-delay:2s}
+  @keyframes ripple{0%{transform:translateX(-50%) scale(.6);opacity:.5}100%{transform:translateX(-50%) scale(1.25);opacity:0}}
+
+  /* ---------- affiliation + keyword band ---------- */
+  .affil{
+    position:relative;z-index:3;
+    display:inline-flex;align-items:center;gap:9px;
+    font-family:"Jua",sans-serif;font-size:1.05rem;color:var(--ink);
+    background:var(--surface);border:1px solid var(--line);border-radius:999px;
+    padding:9px 18px;box-shadow:var(--card-shadow);margin:-20px 0 16px;
+  }
+  .affil-ico{font-size:1.05rem}
+  .keyband{
+    position:relative;z-index:3;
+    background:var(--surface);border:1px solid var(--line);border-radius:22px;
+    padding:22px 24px;box-shadow:var(--card-shadow);
+    display:flex;align-items:center;gap:18px;flex-wrap:wrap;
+  }
+  @media(max-width:640px){.keyband{flex-direction:column;align-items:flex-start;gap:12px}}
+  .kb-label{
+    font-family:"Space Mono",monospace;font-size:.72rem;font-weight:700;
+    letter-spacing:.18em;text-transform:uppercase;color:var(--aqua-deep);flex:none;
+  }
+  .kb-tags{display:flex;flex-wrap:wrap;gap:10px}
+  .kw{
+    font-family:"Jua",sans-serif;font-size:.98rem;color:var(--ink);
+    padding:7px 15px;border-radius:999px;
+    background:var(--surface-2);border:1px solid var(--line);
+  }
+  .kw:nth-child(3n+1){color:var(--aqua-deep);border-color:color-mix(in srgb,var(--aqua) 40%,var(--line))}
+  .kw:nth-child(3n+2){color:var(--coral-deep);border-color:color-mix(in srgb,var(--coral) 40%,var(--line))}
+
+  /* ---------- sections ---------- */
+  section{padding-block:56px}
+  .sec-head{margin-bottom:26px}
+  .sec-head h2{font-size:clamp(1.7rem,4vw,2.3rem);margin:.35rem 0 0;text-wrap:balance}
+  .sec-head p{color:var(--ink-soft);margin:.4rem 0 0;max-width:52ch}
+
+  /* awards */
+  .awards{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+  @media(max-width:720px){.awards{grid-template-columns:1fr}}
+  .award{
+    position:relative;background:var(--surface);border:1px solid var(--line);
+    border-radius:16px;padding:16px 18px 16px 16px;box-shadow:var(--card-shadow);
+    overflow:hidden;display:flex;align-items:flex-start;gap:12px;
+  }
+  .award::before{content:"";position:absolute;inset:0 auto 0 0;width:4px;height:auto;
+    background:linear-gradient(180deg,var(--sun),var(--coral))}
+  .award .medal{font-size:1.6rem;line-height:1;flex:none;
+    filter:drop-shadow(0 3px 5px rgba(0,0,0,.15))}
+  .award .yr{font-family:"Space Mono",monospace;font-weight:700;color:var(--aqua-deep);font-size:.8rem}
+  .award .txt{margin-top:3px;font-size:.98rem;line-height:1.45}
+
+  /* two-col: roles + groups */
+  .duo{display:grid;grid-template-columns:1fr 1fr;gap:40px}
+  @media(max-width:820px){.duo{grid-template-columns:1fr;gap:44px}}
+  .chip-list{display:flex;flex-wrap:wrap;gap:10px;margin-top:4px}
+  .chip{
+    display:inline-flex;align-items:center;gap:8px;
+    background:var(--surface);border:1px solid var(--line);border-radius:999px;
+    padding:9px 16px;font-size:.95rem;
+  }
+  .chip .b{width:9px;height:9px;border-radius:50%;background:var(--coral);flex:none}
+  .chip .yy{font-family:"Space Mono",monospace;font-size:.74rem;color:var(--ink-faint)}
+  .group-list{display:flex;flex-direction:column;gap:12px}
+  .group{
+    display:flex;align-items:center;gap:14px;background:var(--surface);
+    border:1px solid var(--line);border-radius:16px;padding:14px 16px;
+  }
+  .group .ico{width:38px;height:38px;border-radius:12px;flex:none;display:grid;place-items:center;
+    background:var(--surface-2);font-size:1.1rem}
+  .group .t{font-size:1rem}
+  .group .yy{margin-left:auto;font-family:"Space Mono",monospace;font-size:.76rem;color:var(--ink-faint);flex:none}
+
+  /* timeline */
+  .filters{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:26px}
+  .filt{
+    border:1.5px solid var(--line);background:var(--surface);color:var(--ink-soft);
+    font-family:"Space Mono",monospace;font-weight:700;font-size:.82rem;
+    padding:8px 16px;border-radius:999px;cursor:pointer;transition:.2s;
+  }
+  .filt:hover{border-color:var(--aqua);color:var(--aqua-deep)}
+  .filt[aria-pressed="true"]{background:var(--aqua);border-color:var(--aqua);color:#fff}
+  .timeline{position:relative;padding-left:30px}
+  .timeline::before{content:"";position:absolute;left:9px;top:6px;bottom:6px;width:2px;
+    background:linear-gradient(var(--aqua),var(--kelp))}
+  .tl{position:relative;padding:12px 0 12px 6px;transition:opacity .3s,transform .3s}
+  .tl::before{content:"";position:absolute;left:-25px;top:20px;width:14px;height:14px;border-radius:50%;
+    background:var(--surface);border:3px solid var(--aqua);transition:.25s}
+  .tl:hover::before{background:var(--coral);border-color:var(--coral);transform:scale(1.25)}
+  .tl.hide{display:none}
+  .tl .yr{font-family:"Space Mono",monospace;font-weight:700;font-size:.82rem;color:var(--coral-deep)}
+  .tl .place{font-family:"Jua",sans-serif;font-size:1.08rem;margin:2px 0}
+  .tl .desc{color:var(--ink-soft);font-size:.94rem}
+
+  /* tools */
+  .tools-wrap{
+    position:relative;background:
+      radial-gradient(100% 120% at 50% 120%,var(--aqua-glow),transparent 60%),var(--surface);
+    border:1px solid var(--line);border-radius:26px;padding:34px 24px;box-shadow:var(--card-shadow);
+    overflow:hidden;
+  }
+  .tools{display:flex;flex-wrap:wrap;gap:14px;justify-content:center}
+  .tool{
+    --f:var(--aqua);
+    position:relative;display:inline-flex;align-items:center;gap:9px;
+    background:var(--surface-2);border:1.5px solid var(--line);text-decoration:none;color:var(--ink);
+    padding:12px 20px;border-radius:14px;font-size:1rem;
+    transition:transform .2s,box-shadow .2s,border-color .2s,background .2s;
+  }
+  .tool::before{content:"";width:10px;height:10px;border-radius:50%;background:var(--f);flex:none;
+    box-shadow:0 0 0 4px color-mix(in srgb,var(--f) 22%,transparent)}
+  .tool .arrow{color:var(--ink-faint);font-size:.9rem;transition:transform .2s}
+  .tool:hover{transform:translateY(-4px);border-color:var(--f);
+    box-shadow:0 12px 24px -14px var(--f);background:var(--surface)}
+  .tool:hover .arrow{transform:translate(2px,-2px);color:var(--f)}
+  .tools-hint{text-align:center;color:var(--ink-faint);font-size:.82rem;margin-top:18px;
+    font-family:"Space Mono",monospace}
+
+  /* contact */
+  .contact{text-align:center;background:
+      radial-gradient(120% 140% at 50% -20%,var(--sky-1),transparent 55%);
+    border-radius:28px;padding:52px 24px;border:1px solid var(--line);margin-top:10px}
+  .contact h2{font-size:clamp(1.8rem,5vw,2.6rem);margin:.4rem 0}
+  .contact p{color:var(--ink-soft);max-width:40ch;margin:0 auto 24px}
+  .contact .cta{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+
+  footer{text-align:center;color:var(--ink-faint);font-size:.82rem;padding:34px 20px 46px}
+  footer .paw{color:var(--coral)}
+
+  .reveal{opacity:1}
+  @media (prefers-reduced-motion:reduce){
+    *{animation:none!important;scroll-behavior:auto!important;transition:none!important}
+  }
+  :focus-visible{outline:3px solid var(--ring);outline-offset:2px;border-radius:6px}
+</style>
+
+<div class="topbar">
+  <div class="wrap row">
+    <div class="brand"><span class="dot" aria-hidden="true">🦦</span>해달쌤 프로필</div>
+    <nav class="nav" aria-label="섹션">
+      <a href="#awards">수상</a>
+      <a href="#roles">선도교사</a>
+      <a href="#lectures">강의</a>
+      <a href="#tools">에듀테크</a>
+      <a href="#contact" class="hide-sm">협업 요청</a>
+      <button class="theme-btn" id="themeBtn" aria-label="라이트/다크 전환" title="테마 전환">🌙</button>
+    </nav>
+  </div>
+</div>
+
+<header class="hero" id="top">
+  <div class="hero-bg"></div>
+  <canvas class="hero-canvas" id="bubbles" aria-hidden="true"></canvas>
+  <div class="wrap">
+    <div>
+      <span class="role">Chemistry Teacher · EdTech</span>
+      <h1>안녕하세요,<br><span class="hl">과학 해달쌤</span>입니다</h1>
+      <p class="lead">‘어떻게 하면 더 재미있게 배울까?’<br>이 질문을 안고 매일 교실에 섭니다.<br>에듀테크로 과학의 즐거움을 함께 발견해요.</p>
+      <div class="cta">
+        <a href="https://blog.naver.com/haedalssam" class="btn primary" target="_blank" rel="noopener">📖 블로그 · 실험실의 해달쌤</a>
+        <a href="#lectures" class="btn ghost">🎤 강의 이력 보기</a>
+        <a href="#contact" class="btn ghost">🦦 연락하기</a>
+      </div>
+    </div>
+    <div class="otter-stage" aria-hidden="true">
+      <div class="otter-ring"></div>
+      <!-- 도구를 든 해달: 수달은 도구를 쓰는 동물, 에듀테크의 은유 -->
+      <svg viewBox="0 0 220 220" role="img" aria-label="플라스크를 든 해달 일러스트">
+        <defs>
+          <radialGradient id="belly" cx="50%" cy="40%" r="70%">
+            <stop offset="0%" stop-color="#F3E2CE"/><stop offset="100%" stop-color="#E4C9AB"/>
+          </radialGradient>
+          <linearGradient id="body" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="var(--otter)"/><stop offset="100%" stop-color="#6E482C"/>
+          </linearGradient>
+          <linearGradient id="flask" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="var(--aqua)" stop-opacity=".5"/>
+            <stop offset="100%" stop-color="var(--aqua-deep)"/>
+          </linearGradient>
+        </defs>
+        <!-- water disc -->
+        <ellipse cx="110" cy="176" rx="86" ry="20" fill="var(--aqua)" opacity=".16"/>
+        <!-- tail -->
+        <path d="M40 150 Q6 150 14 128 Q30 138 52 138 Z" fill="url(#body)"/>
+        <!-- body (floating on back) -->
+        <ellipse cx="112" cy="140" rx="78" ry="34" fill="url(#body)"/>
+        <ellipse cx="118" cy="140" rx="60" ry="24" fill="url(#belly)"/>
+        <!-- feet -->
+        <ellipse cx="60" cy="126" rx="12" ry="9" fill="#6E482C"/>
+        <ellipse cx="80" cy="122" rx="12" ry="9" fill="#6E482C"/>
+        <!-- head -->
+        <circle cx="176" cy="120" r="30" fill="url(#body)"/>
+        <ellipse cx="180" cy="126" rx="17" ry="14" fill="url(#belly)"/>
+        <circle cx="160" cy="98" r="8" fill="var(--otter)"/>
+        <circle cx="192" cy="98" r="8" fill="var(--otter)"/>
+        <circle cx="160" cy="98" r="4" fill="#F3E2CE"/>
+        <circle cx="192" cy="98" r="4" fill="#F3E2CE"/>
+        <circle cx="169" cy="116" r="3.4" fill="#2A1B10"/>
+        <circle cx="185" cy="116" r="3.4" fill="#2A1B10"/>
+        <ellipse cx="177" cy="126" rx="4.6" ry="3.4" fill="#2A1B10"/>
+        <path d="M172 132 Q177 136 182 132" stroke="#2A1B10" stroke-width="2" fill="none" stroke-linecap="round"/>
+        <!-- paws holding flask -->
+        <ellipse cx="120" cy="112" rx="11" ry="9" fill="#6E482C"/>
+        <ellipse cx="146" cy="112" rx="11" ry="9" fill="#6E482C"/>
+        <!-- erlenmeyer flask -->
+        <g transform="translate(118 70)">
+          <path d="M8 0 h14 v16 l12 26 a10 10 0 0 1 -9 15 h-20 a10 10 0 0 1 -9 -15 l12 -26 Z"
+                fill="url(#flask)" stroke="var(--aqua-deep)" stroke-width="2"/>
+          <path d="M-1 40 h32 l6 12 a10 10 0 0 1 -9 15 h-32 a10 10 0 0 1 -9 -15 Z" fill="var(--aqua)" opacity=".85"/>
+          <rect x="6" y="-4" width="18" height="5" rx="2.5" fill="var(--aqua-deep)"/>
+          <circle cx="6" cy="34" r="3" fill="#fff" opacity=".8"/>
+          <circle cx="18" cy="26" r="2.4" fill="#fff" opacity=".7"/>
+          <circle cx="26" cy="16" r="2" fill="var(--sun)"/>
+        </g>
+      </svg>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+    <div class="affil"><span class="affil-ico">🧪</span> 경기도 교육청 중등 화학 교사</div>
+    <div class="keyband">
+      <span class="kb-label">이런 사람이에요</span>
+      <div class="kb-tags">
+        <span class="kw">화학 교사</span>
+        <span class="kw">에듀테크</span>
+        <span class="kw">AI 교수학습 플랫폼</span>
+        <span class="kw">AI 융합교육</span>
+        <span class="kw">AI 서논술형 평가</span>
+        <span class="kw">질문이 있는 교실</span>
+        <span class="kw">함께 성장</span>
+        <span class="kw">수업 혁신</span>
+        <span class="kw">업무 효율화</span>
+        <span class="kw">바이브코딩</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- about / values -->
+  <section id="about">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="eyebrow">About</span>
+        <h2>질문이 정답보다 소중한 교실</h2>
+        <p>학생들이 과학의 즐거움을 발견하고, 과학 기술을 통해 미래 역량을 키울 수 있도록 에듀테크를 활용한 수업을 연구하고 실천합니다. 협력하고 공유하며 함께 성장하는 교실을 만들어 갑니다.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- awards -->
+  <section id="awards">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="eyebrow">Awards</span>
+        <h2>🏆 수상</h2>
+      </div>
+      <div class="awards">
+        <article class="award">
+          <span class="medal">🥇</span>
+          <div class="aw-body">
+            <div class="yr">2024</div>
+            <div class="txt">경기도 교육청 하이러닝 공모전 입상 (유형2)</div>
+          </div>
+        </article>
+        <article class="award">
+          <span class="medal">🥇</span>
+          <div class="aw-body">
+            <div class="yr">2025</div>
+            <div class="txt">경기도 교육청 하이러닝 공모제안 입상</div>
+          </div>
+        </article>
+        <article class="award">
+          <span class="medal">🥇</span>
+          <div class="aw-body">
+            <div class="yr">2026</div>
+            <div class="txt">경기도 교육청 수업혁신사례연구대회 1등급</div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- roles + groups -->
+  <section id="roles">
+    <div class="wrap">
+      <div class="duo">
+        <div>
+          <div class="sec-head">
+            <span class="eyebrow">Leadership</span>
+            <h2>🙋🏻‍♀️ 선도교사</h2>
+          </div>
+          <div class="chip-list">
+            <span class="chip"><span class="b"></span>교실혁명 선도교사</span>
+            <span class="chip"><span class="b"></span>AIEDAP 마스터교원</span>
+            <span class="chip"><span class="b"></span>지식샘터 멘토</span>
+            <span class="chip"><span class="b"></span>경기도 디지털 시민교육 선도교사 <span class="yy">2024</span></span>
+            <span class="chip"><span class="b"></span>수원 디지털 창의역량 지원단 <span class="yy">2025</span></span>
+            <span class="chip"><span class="b"></span>수원 중등 깊이있는 수업나눔 지원단 <span class="yy">2026</span></span>
+          </div>
+        </div>
+        <div>
+          <div class="sec-head">
+            <span class="eyebrow">Research</span>
+            <h2>📒 연구회</h2>
+          </div>
+          <div class="group-list">
+            <div class="group"><span class="ico">🌊</span><span class="t">고양 에듀테크 연구회</span><span class="yy">2022–2024</span></div>
+            <div class="group"><span class="ico">💡</span><span class="t">경기도 하이러닝 연구회</span></div>
+            <div class="group"><span class="ico">🌱</span><span class="t">교사성장학교 3기</span></div>
+            <div class="group"><span class="ico">🤖</span><span class="t">경기도 AI 디지털 아카데미 전문가 과정</span><span class="yy">2026</span></div>
+            <div class="group"><span class="ico">🔬</span><span class="t">경기도 도단위 수업탐구공동체</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- lectures timeline -->
+  <section id="lectures">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="eyebrow">Lectures</span>
+        <h2>🎤 강의 이력</h2>
+        <p>학교 현장에서 진행한 에듀테크·하이러닝·AI 연수입니다. 연도를 눌러 골라 보세요.</p>
+      </div>
+      <div class="filters" id="filters" role="group" aria-label="연도 필터">
+        <button class="filt" data-y="all" aria-pressed="true">전체</button>
+        <button class="filt" data-y="2023" aria-pressed="false">2023</button>
+        <button class="filt" data-y="2024" aria-pressed="false">2024</button>
+        <button class="filt" data-y="2025" aria-pressed="false">2025</button>
+        <button class="filt" data-y="2026" aria-pressed="false">2026</button>
+      </div>
+      <div class="timeline" id="timeline">
+        <div class="tl" data-y="2023"><div class="yr">2023</div><div class="place">덕은한강중</div><div class="desc">전문적학습공동체 에듀테크 연수</div></div>
+        <div class="tl" data-y="2023"><div class="yr">2023</div><div class="place">원당중</div><div class="desc">전문적학습공동체 에듀테크 연수</div></div>
+        <div class="tl" data-y="2024"><div class="yr">2024</div><div class="place">덕은한강중</div><div class="desc">교사워크숍 에듀테크 연수</div></div>
+        <div class="tl" data-y="2024"><div class="yr">2024</div><div class="place">김포하늘빛중</div><div class="desc">디지털선도학교 하이러닝 연수</div></div>
+        <div class="tl" data-y="2025"><div class="yr">2025</div><div class="place">하성고</div><div class="desc">전문적학습공동체 하이러닝 연수</div></div>
+        <div class="tl" data-y="2025"><div class="yr">2025</div><div class="place">권선중</div><div class="desc">찾아가는 밀착형 하이러닝 활용 역량강화 연수</div></div>
+        <div class="tl" data-y="2025"><div class="yr">2025</div><div class="place">유신고</div><div class="desc">찾아가는 밀착형 하이러닝 활용 역량강화 연수</div></div>
+        <div class="tl" data-y="2025"><div class="yr">2025</div><div class="place">소현중</div><div class="desc">전문적학습공동체 하이러닝 연수</div></div>
+        <div class="tl" data-y="2025"><div class="yr">2025</div><div class="place">원천중</div><div class="desc">전문적학습공동체 하이러닝 연수</div></div>
+        <div class="tl" data-y="2025"><div class="yr">2025</div><div class="place">덕이중</div><div class="desc">전문적학습공동체 · NotebookLM으로 하는 업무효율화 연수</div></div>
+        <div class="tl" data-y="2025"><div class="yr">2025</div><div class="place">김포중</div><div class="desc">전문적학습공동체 · 하이러닝, NotebookLM 연수</div></div>
+        <div class="tl" data-y="2026"><div class="yr">2026</div><div class="place">일산고</div><div class="desc">찾아가는 학교컨설팅 주강사</div></div>
+        <div class="tl" data-y="2026"><div class="yr">2026</div><div class="place">곡정고</div><div class="desc">AI 서·논술형 평가 연수</div></div>
+        <div class="tl" data-y="2026"><div class="yr">2026</div><div class="place">곡정고</div><div class="desc">바이브코딩으로 하는 업무효율화 연수</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- tools -->
+  <section id="tools">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="eyebrow">EdTech</span>
+        <h2>💻 에듀테크 연구</h2>
+        <p>수업과 업무에 실제로 활용하며 연구하는 도구들이에요. 눌러서 각 사이트로 이동할 수 있어요.</p>
+      </div>
+      <div class="tools-wrap">
+        <div class="tools" id="toolGrid"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- contact -->
+  <section id="contact">
+    <div class="wrap">
+      <div class="contact">
+        <span class="eyebrow" style="justify-content:center">Contact</span>
+        <h2>함께 성장해요 🦦</h2>
+        <p>연수·협업·수업 나눔 언제든 환영합니다. 편하게 연락 주세요!</p>
+        <div class="cta">
+          <a href="mailto:hy123478@gmail.com" class="btn primary">✉️ hy123478@gmail.com</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div>과학 해달쌤 <span class="paw">🐾</span> 화학 교사 · 에듀테크</div>
+</footer>
+
+<script>
+(function(){
+  var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion:reduce)").matches;
+
+  /* ---- theme toggle ---- */
+  var root=document.documentElement, tb=document.getElementById("themeBtn");
+  function sysDark(){return window.matchMedia && window.matchMedia("(prefers-color-scheme:dark)").matches;}
+  function curDark(){var t=root.getAttribute("data-theme");return t?t==="dark":sysDark();}
+  function paint(){tb.textContent=curDark()?"☀️":"🌙";}
+  paint();
+  tb.addEventListener("click",function(){
+    root.setAttribute("data-theme",curDark()?"light":"dark");paint();
+  });
+  if(window.matchMedia){window.matchMedia("(prefers-color-scheme:dark)").addEventListener("change",paint);}
+
+  /* ---- lecture filter ---- */
+  var filts=document.querySelectorAll(".filt"), tls=document.querySelectorAll(".tl");
+  filts.forEach(function(f){
+    f.addEventListener("click",function(){
+      filts.forEach(function(x){x.setAttribute("aria-pressed","false");});
+      f.setAttribute("aria-pressed","true");
+      var y=f.dataset.y;
+      tls.forEach(function(t){t.classList.toggle("hide", y!=="all" && t.dataset.y!==y);});
+    });
+  });
+
+  /* ---- edtech tool links ---- */
+  var TOOLS=[
+    {name:"바이브 코딩",url:"https://www.anthropic.com/claude-code"},
+    {name:"띵커벨",url:"https://www.tkbell.co.kr"},
+    {name:"왓퀴즈 AI",url:"https://whatquiz.co.kr"},
+    {name:"Google AI Studio",url:"https://aistudio.google.com"},
+    {name:"Claude",url:"https://claude.ai"},
+    {name:"NotebookLM",url:"https://notebooklm.google.com"},
+    {name:"Padlet",url:"https://padlet.com"},
+    {name:"Tooning",url:"https://tooning.io"},
+    {name:"경기도교육청 AI 교수학습 플랫폼",url:"https://hi.goe.go.kr"},
+    {name:"Notion",url:"https://www.notion.so"},
+    {name:"Canva",url:"https://www.canva.com"}
+  ];
+  var COLORS=["var(--aqua)","var(--coral)","var(--sun)","var(--kelp)","var(--aqua-deep)"];
+  var wrap=document.getElementById("toolGrid");
+  TOOLS.forEach(function(t,i){
+    var a=document.createElement("a");
+    a.className="tool";a.href=t.url;a.target="_blank";a.rel="noopener";
+    a.style.setProperty("--f",COLORS[i%COLORS.length]);
+    a.innerHTML='<span>'+t.name+'</span><span class="arrow" aria-hidden="true">↗</span>';
+    wrap.appendChild(a);
+  });
+
+  /* ---- hero bubbles (canvas) ---- */
+  if(!reduce){
+    var cv=document.getElementById("bubbles"), ctx=cv.getContext("2d"), W,H,parts=[];
+    function size(){var r=cv.parentElement.getBoundingClientRect();W=cv.width=r.width;H=cv.height=r.height;}
+    size();window.addEventListener("resize",size);
+    function mk(){return{x:Math.random()*W,y:H+Math.random()*40,r:2+Math.random()*7,
+      s:.3+Math.random()*.9,a:.12+Math.random()*.3,w:Math.random()*Math.PI*2};}
+    for(var i=0;i<38;i++){var p=mk();p.y=Math.random()*H;parts.push(p);}
+    function tick(){
+      ctx.clearRect(0,0,W,H);
+      var acc=getComputedStyle(document.documentElement).getPropertyValue("--aqua").trim()||"#0EA5A0";
+      parts.forEach(function(p){
+        p.y-=p.s;p.w+=0.02;p.x+=Math.sin(p.w)*0.4;
+        if(p.y<-10){Object.assign(p,mk());}
+        ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+        ctx.fillStyle=acc;ctx.globalAlpha=p.a;ctx.fill();
+        ctx.globalAlpha=p.a*1.4;ctx.beginPath();
+        ctx.arc(p.x-p.r*0.3,p.y-p.r*0.3,p.r*0.35,0,Math.PI*2);ctx.fillStyle="#fff";ctx.fill();
+      });
+      ctx.globalAlpha=1;requestAnimationFrame(tick);
+    }
+    tick();
+  }
+})();
+</script>
