@@ -262,14 +262,14 @@ function stripLeadingEmoji(t) {
   return t.replace(/^\S+\s?/, (m) => (/^\p{Extended_Pictographic}/u.test(m) ? '' : m));
 }
 
-function listSection(title, items) {
+function listSection(title, icon, items) {
   if (!items || items.length === 0) return '';
   const lis = items
     .map((t) => `<li>${esc(stripLeadingEmoji(t))}</li>`)
     .join('\n        ');
   return `
     <section class="section">
-      <h2>${esc(title)}</h2>
+      <h2><span class="sec-icon">${icon}</span>${esc(title)}</h2>
       <ul class="plain-list">
         ${lis}
       </ul>
@@ -280,7 +280,6 @@ function renderHTML(d) {
   const name = d.personLine
     ? esc(stripLeadingEmoji(d.personLine))
     : '포트폴리오';
-  // "김현영(화학 교사)" -> 이름과 역할 분리
   const match = name.match(/^([^(]+)\(([^)]+)\)\s*$/);
   const displayName = match ? match[1].trim() : name;
   const role = match ? match[2].trim() : '';
@@ -288,7 +287,7 @@ function renderHTML(d) {
   const toolsHTML = d.tools.length
     ? `
     <section class="section">
-      <h2>${esc('에듀테크 연구')}</h2>
+      <h2><span class="sec-icon">💻</span>에듀테크 연구</h2>
       <p class="tools-line">
         ${d.tools
           .map((t) =>
@@ -309,21 +308,28 @@ function renderHTML(d) {
 <title>${esc(d.pageTitle)}</title>
 <meta name="description" content="${esc(d.introText).slice(0, 140)}" />
 <link rel="preconnect" href="https://cdn.jsdelivr.net" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@600;700&display=swap" />
 <style>
   :root {
-    --bg: #FAFAF7;
-    --ink: #1B1B18;
-    --sub: #8B8B83;
+    --bg: #FBF8F2;
+    --ink: #2A2620;
+    --sub: #8A7C6B;
     --accent: #2F6F5E;
-    --line: #E4E1D8;
+    --accent-soft: #E1EDE9;
+    --chalk: #F4D689;
+    --chalk-ink: #6B4E16;
+    --line: #E7E0D2;
   }
   * { box-sizing: border-box; }
   html { scroll-behavior: smooth; }
   body {
     margin: 0;
     font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
-    background: var(--bg);
+    background-color: var(--bg);
+    background-image: radial-gradient(#EFE8D8 1px, transparent 1px);
+    background-size: 22px 22px;
     color: var(--ink);
     line-height: 1.75;
     -webkit-font-smoothing: antialiased;
@@ -331,26 +337,29 @@ function renderHTML(d) {
   main {
     max-width: 640px;
     margin: 0 auto;
-    padding: 96px 28px 120px;
+    padding: 88px 28px 120px;
   }
 
   .hero {
     display: flex;
     align-items: center;
-    gap: 24px;
-    margin-bottom: 56px;
+    gap: 26px;
+    margin-bottom: 20px;
   }
   .avatar {
-    width: 96px;
-    height: 96px;
-    border-radius: 14px;
+    width: 108px;
+    height: 108px;
+    border-radius: 12px;
     object-fit: cover;
     flex-shrink: 0;
     background: var(--line);
+    border: 3px solid var(--accent);
+    box-shadow: 4px 4px 0 var(--accent-soft);
   }
   .hero h1 {
     margin: 0 0 6px;
-    font-size: 32px;
+    font-family: 'Noto Serif KR', 'Pretendard', serif;
+    font-size: 34px;
     font-weight: 700;
     letter-spacing: -0.01em;
   }
@@ -374,30 +383,37 @@ function renderHTML(d) {
   .intro {
     font-size: 17px;
     color: var(--ink);
-    margin: 0 0 20px;
-    padding-left: 16px;
-    border-left: 2px solid var(--accent);
+    margin: 44px 0 22px;
+    padding-left: 18px;
+    border-left: 3px solid var(--accent);
   }
-  .values {
+
+  .quote-note {
+    display: inline-block;
+    background: var(--chalk);
+    color: var(--chalk-ink);
     font-size: 14px;
-    color: var(--sub);
-    margin: 0 0 64px;
-    padding-left: 16px;
+    font-weight: 600;
+    padding: 16px 20px;
+    margin: 0 0 60px;
+    border-radius: 3px 3px 3px 18px;
+    transform: rotate(-1deg);
+    box-shadow: 3px 5px 0 rgba(0,0,0,0.05);
   }
 
   .section {
-    padding-top: 40px;
-    margin-top: 40px;
-    border-top: 1px solid var(--line);
+    padding-top: 36px;
+    margin-top: 36px;
+    border-top: 1px dashed var(--line);
   }
   .section:first-of-type { border-top: none; margin-top: 0; padding-top: 0; }
   .section h2 {
-    font-size: 13px;
-    font-weight: 600;
+    font-size: 14px;
+    font-weight: 700;
     color: var(--accent);
     margin: 0 0 18px;
-    letter-spacing: 0.02em;
   }
+  .sec-icon { margin-right: 8px; }
   .plain-list {
     list-style: none;
     margin: 0;
@@ -437,10 +453,10 @@ function renderHTML(d) {
   }
 
   @media (max-width: 480px) {
-    main { padding: 64px 20px 90px; }
-    .hero { gap: 16px; margin-bottom: 44px; }
-    .avatar { width: 76px; height: 76px; border-radius: 12px; }
-    .hero h1 { font-size: 26px; }
+    main { padding: 60px 20px 90px; }
+    .hero { gap: 16px; }
+    .avatar { width: 84px; height: 84px; border-radius: 10px; }
+    .hero h1 { font-size: 27px; }
   }
 </style>
 </head>
@@ -460,12 +476,12 @@ function renderHTML(d) {
     </div>
 
     ${d.introText ? `<p class="intro">${esc(d.introText)}</p>` : ''}
-    ${d.valuesText ? `<p class="values">${esc(d.valuesText)}</p>` : ''}
+    ${d.valuesText ? `<p class="quote-note">${esc(d.valuesText.replace(/^👩‍🎓\s?/, ''))}</p>` : ''}
 
-    ${listSection(d.sectionTitles.award, d.sections.award)}
-    ${listSection(d.sectionTitles.leader, d.sections.leader)}
-    ${listSection(d.sectionTitles.community, d.sections.community)}
-    ${listSection(d.sectionTitles.lecture, d.sections.lecture)}
+    ${listSection(d.sectionTitles.award, '🏆', d.sections.award)}
+    ${listSection(d.sectionTitles.leader, '🙋🏻\u200d♀️', d.sections.leader)}
+    ${listSection(d.sectionTitles.community, '📒', d.sections.community)}
+    ${listSection(d.sectionTitles.lecture, '🎤', d.sections.lecture)}
     ${toolsHTML}
   </main>
 
