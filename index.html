@@ -4,270 +4,220 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>과학 해달쌤</title>
+<meta name="description" content="'어떻게 하면 더 재미있게 배울까?'라는 질문을 안고 매일 교실에 섭니다. 학생들이 과학의 즐거움을 발견하고, 과학 기술을 통해 미래 역량을 키울 수 있도록 에듀테크를 활용한 수업을 연구하고 실천하고 있습니다." />
 <link rel="preconnect" href="https://cdn.jsdelivr.net" />
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css" />
 <style>
   :root {
-    --bg: #FBF9F6;
-    --card: #FFFFFF;
-    --ink: #2B2622;
-    --sub: #746B62;
-    --accent: #E4785C;
-    --accent-soft: #FCE7DF;
-    --teal: #3E7C74;
-    --teal-soft: #E2F0ED;
-    --line: #EEE7DE;
-    --radius: 20px;
+    --bg: #FAFAF7;
+    --ink: #1B1B18;
+    --sub: #8B8B83;
+    --accent: #2F6F5E;
+    --line: #E4E1D8;
   }
   * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
   body {
     margin: 0;
     font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
     background: var(--bg);
     color: var(--ink);
-    line-height: 1.7;
+    line-height: 1.75;
+    -webkit-font-smoothing: antialiased;
   }
-  .hero {
-    position: relative;
-    padding: 0 0 60px;
-  }
-  .cover {
-    width: 100%;
-    height: 220px;
-    object-fit: cover;
-    background: linear-gradient(135deg, var(--teal-soft), var(--accent-soft));
-  }
-  .hero-inner {
-    max-width: 880px;
-    margin: -70px auto 0;
-    padding: 0 24px;
-    display: flex;
-    gap: 28px;
-    align-items: flex-end;
-    flex-wrap: wrap;
-  }
-  .avatar {
-    width: 140px;
-    height: 140px;
-    border-radius: 50%;
-    object-fit: cover;
-    border: 6px solid var(--bg);
-    background: var(--card);
-    box-shadow: 0 8px 24px rgba(0,0,0,0.08);
-  }
-  .hero-text { padding-bottom: 8px; }
-  .hero-text h1 {
-    margin: 0 0 6px;
-    font-size: 30px;
-    font-weight: 800;
-  }
-  .hero-text .icon-badge { font-size: 26px; margin-right: 6px; }
-  .contact-row {
-    display: flex;
-    gap: 14px;
-    flex-wrap: wrap;
-    margin-top: 10px;
-  }
-  .contact-row a, .contact-row span {
-    font-size: 14px;
-    color: var(--sub);
-    text-decoration: none;
-    background: var(--card);
-    padding: 6px 14px;
-    border-radius: 999px;
-    border: 1px solid var(--line);
-  }
-  .contact-row a:hover { border-color: var(--accent); color: var(--accent); }
-
   main {
-    max-width: 880px;
+    max-width: 640px;
     margin: 0 auto;
-    padding: 0 24px 80px;
-    display: flex;
-    flex-direction: column;
-    gap: 24px;
+    padding: 96px 28px 120px;
   }
-  .intro-callout {
-    background: var(--teal-soft);
-    color: var(--teal);
-    border-radius: var(--radius);
-    padding: 22px 26px;
-    font-size: 16px;
-    font-weight: 500;
-  }
-  .quote-box {
-    border-left: 4px solid var(--accent);
-    background: var(--accent-soft);
-    border-radius: 0 var(--radius) var(--radius) 0;
-    padding: 18px 24px;
-    font-size: 15px;
-    color: #8A4A34;
-    font-weight: 600;
-  }
-  .card {
-    background: var(--card);
-    border-radius: var(--radius);
-    padding: 28px 30px;
-    border: 1px solid var(--line);
-  }
-  .card h2 {
-    margin: 0 0 16px;
-    font-size: 18px;
-    font-weight: 700;
+
+  .hero {
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 24px;
+    margin-bottom: 56px;
   }
-  .card h2 .icon { font-size: 20px; }
-  .list {
-    margin: 0;
-    padding-left: 20px;
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    font-size: 14.5px;
-    color: var(--ink);
+  .avatar {
+    width: 96px;
+    height: 96px;
+    border-radius: 14px;
+    object-fit: cover;
+    flex-shrink: 0;
+    background: var(--line);
   }
-  .list li { padding-left: 2px; }
-  .tools-grid {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
+  .hero h1 {
+    margin: 0 0 6px;
+    font-size: 32px;
+    font-weight: 700;
+    letter-spacing: -0.01em;
   }
-  .tool-chip {
-    background: var(--teal-soft);
-    color: var(--teal);
-    padding: 8px 16px;
-    border-radius: 999px;
-    font-size: 14px;
-    font-weight: 600;
-    text-decoration: none;
-  }
-  .tool-chip:hover { background: var(--teal); color: #fff; }
-  footer {
-    text-align: center;
-    padding: 30px 0 50px;
-    font-size: 13px;
+  .hero .role {
+    margin: 0 0 12px;
+    font-size: 15px;
     color: var(--sub);
   }
-  @media (max-width: 520px) {
-    .hero-inner { flex-direction: column; align-items: flex-start; }
-    .avatar { width: 110px; height: 110px; }
-    .hero-text h1 { font-size: 24px; }
+  .contact-line {
+    font-size: 14px;
+    color: var(--sub);
+  }
+  .contact-line a {
+    color: var(--sub);
+    text-decoration: none;
+    border-bottom: 1px solid var(--line);
+  }
+  .contact-line a:hover { color: var(--accent); border-color: var(--accent); }
+  .contact-line .dot { margin: 0 10px; color: var(--line); }
+
+  .intro {
+    font-size: 17px;
+    color: var(--ink);
+    margin: 0 0 20px;
+    padding-left: 16px;
+    border-left: 2px solid var(--accent);
+  }
+  .values {
+    font-size: 14px;
+    color: var(--sub);
+    margin: 0 0 64px;
+    padding-left: 16px;
+  }
+
+  .section {
+    padding-top: 40px;
+    margin-top: 40px;
+    border-top: 1px solid var(--line);
+  }
+  .section:first-of-type { border-top: none; margin-top: 0; padding-top: 0; }
+  .section h2 {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--accent);
+    margin: 0 0 18px;
+    letter-spacing: 0.02em;
+  }
+  .plain-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .plain-list li {
+    font-size: 15px;
+    color: var(--ink);
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--line);
+  }
+  .plain-list li:last-child { border-bottom: none; padding-bottom: 0; }
+
+  .tools-line {
+    font-size: 15px;
+    line-height: 2.1;
+    margin: 0;
+  }
+  .tools-line a {
+    color: var(--ink);
+    text-decoration: none;
+    border-bottom: 1px solid var(--line);
+  }
+  .tools-line a:hover { color: var(--accent); border-color: var(--accent); }
+  .tools-line span:not(.dot) { color: var(--sub); }
+  .tools-line .dot { margin: 0 10px; color: var(--line); }
+
+  footer {
+    max-width: 640px;
+    margin: 0 auto;
+    padding: 0 28px 60px;
+    font-size: 12px;
+    color: var(--sub);
+  }
+
+  @media (max-width: 480px) {
+    main { padding: 64px 20px 90px; }
+    .hero { gap: 16px; margin-bottom: 44px; }
+    .avatar { width: 76px; height: 76px; border-radius: 12px; }
+    .hero h1 { font-size: 26px; }
   }
 </style>
 </head>
 <body>
-  <div class="hero">
-    <img class="cover" src="assets/cover.jpg" alt="cover" />
-    <div class="hero-inner">
+  <main>
+    <div class="hero">
       <img class="avatar" src="assets/profile.png" alt="profile" />
-      <div class="hero-text">
-        <h1><span class="icon-badge">👩🏻‍🏫</span>김현영(화학 교사)</h1>
-        <div class="contact-row">
-          <a href="mailto:hy123478@gmail.com">✉️ hy123478@gmail.com</a>
-          <a href="https://blog.naver.com/haedalssam" target="_blank" rel="noopener">📎 블로그 (실험실의 해달쌤)</a>
-        </div>
+      <div>
+        <h1>김현영</h1>
+        <p class="role">화학 교사</p>
+        <p class="contact-line">
+          <a href="mailto:hy123478@gmail.com">hy123478@gmail.com</a>
+          <span class="dot">·</span>
+          <a href="https://blog.naver.com/haedalssam" target="_blank" rel="noopener">블로그 (실험실의 해달쌤)</a>
+        </p>
       </div>
     </div>
-  </div>
 
-  <main>
-    <div class="intro-callout">💡 '어떻게 하면 더 재미있게 배울까?'라는 질문을 안고 매일 교실에 섭니다. 학생들이 과학의 즐거움을 발견하고, 과학 기술을 통해 미래 역량을 키울 수 있도록 에듀테크를 활용한 수업을 연구하고 실천하고 있습니다.</div>
-    <div class="quote-box">👩‍🎓 교육 가치관 - 질문이 정답보다 소중한 교실 / 협력하고 공유하며 함께 성장하는 교실</div>
+    <p class="intro">'어떻게 하면 더 재미있게 배울까?'라는 질문을 안고 매일 교실에 섭니다. 학생들이 과학의 즐거움을 발견하고, 과학 기술을 통해 미래 역량을 키울 수 있도록 에듀테크를 활용한 수업을 연구하고 실천하고 있습니다.</p>
+    <p class="values">👩‍🎓 교육 가치관 - 질문이 정답보다 소중한 교실 / 협력하고 공유하며 함께 성장하는 교실</p>
 
     
-      <section class="card">
-        <h2><span class="icon">🏆</span>수상</h2>
-        <ul class="list">
-            <li>경기도 교육청 하이러닝 공모전 입상(유형2)(2024)</li>
-            <li>경기도 교육청 하이러닝 공모제안 입상(2025)</li>
-            <li>경기도 교육청 수업혁신사례연구대회 1등급(2026)</li>
-        </ul>
-      </section>
+    <section class="section">
+      <h2>수상</h2>
+      <ul class="plain-list">
+        <li>경기도 교육청 하이러닝 공모전 입상(유형2)(2024)</li>
+        <li>경기도 교육청 하이러닝 공모제안 입상(2025)</li>
+        <li>경기도 교육청 수업혁신사례연구대회 1등급(2026)</li>
+      </ul>
+    </section>
     
-      <section class="card">
-        <h2><span class="icon">🙋🏻‍♀️</span>선도교사</h2>
-        <ul class="list">
-            <li>교실혁명 선도교사</li>
-            <li>AIEDAP 마스터교원</li>
-            <li>지식샘터 멘토</li>
-            <li>경기도 디지털 시민교육 선도교사(2024)</li>
-            <li>수원 디지털 창의역량 지원단(2025)</li>
-            <li>수원 중등 깊이있는 수업나눔 지원단(2026)</li>
-        </ul>
-      </section>
+    <section class="section">
+      <h2>선도교사</h2>
+      <ul class="plain-list">
+        <li>교실혁명 선도교사</li>
+        <li>AIEDAP 마스터교원</li>
+        <li>지식샘터 멘토</li>
+        <li>경기도 디지털 시민교육 선도교사(2024)</li>
+        <li>수원 디지털 창의역량 지원단(2025)</li>
+        <li>수원 중등 깊이있는 수업나눔 지원단(2026)</li>
+      </ul>
+    </section>
     
-      <section class="card">
-        <h2><span class="icon">📒</span>연구회</h2>
-        <ul class="list">
-            <li>고양 에듀테크 연구회(2022-2024)</li>
-            <li>경기도 하이러닝 연구회</li>
-            <li>교사성장학교 3기</li>
-            <li>경기도 AI 디지털 아카데미 전문가 과정(2026)</li>
-            <li>경기도 도단위 수업탐구공동체</li>
-        </ul>
-      </section>
+    <section class="section">
+      <h2>연구회</h2>
+      <ul class="plain-list">
+        <li>고양 에듀테크 연구회(2022-2024)</li>
+        <li>경기도 하이러닝 연구회</li>
+        <li>교사성장학교 3기</li>
+        <li>경기도 AI 디지털 아카데미 전문가 과정(2026)</li>
+        <li>경기도 도단위 수업탐구공동체</li>
+      </ul>
+    </section>
     
-      <section class="card">
-        <h2><span class="icon">🎤</span>강의 이력</h2>
-        <ul class="list">
-            <li>2023 덕은한강중 전문적학습공동체 에듀테크  연수</li>
-            <li>2023 원당중 전문적학습공동체 에듀테크 연수</li>
-            <li>2024 덕은한강중 교사워크숍 에듀테크 연수</li>
-            <li>2024 김포하늘빛중 디지털선도학교 하이러닝 연수</li>
-            <li>2025 하성고 전문적학습공동체 하이러닝 연수</li>
-            <li>2025 권선중 찾아가는 밀착형 하이러닝 활용 역량강화 연수</li>
-            <li>2025 유신고 찾아가는 밀착형 하이러닝 활용 역량강화 연수</li>
-            <li>2025 소현중 전문적학습공동체 하이러닝 연수</li>
-            <li>2025 원천중 전문적학습공동체 하이러닝 연수</li>
-            <li>2025 덕이중 전문적학습공동체 NotebookLM으로 하는 업무효율화 연수</li>
-            <li>2025 김포중 전문적학습공동체 하이러닝, notebookLM 연수</li>
-            <li>2026 일산고 찾아가는학교컨설팅 주강사</li>
-            <li>2026 곡정고 AI 서논술형 평가 연수</li>
-            <li>2026 곡정고 바이브코딩으로 하는 업무효율화 연수</li>
-        </ul>
-      </section>
+    <section class="section">
+      <h2>강의 이력</h2>
+      <ul class="plain-list">
+        <li>2023 덕은한강중 전문적학습공동체 에듀테크  연수</li>
+        <li>2023 원당중 전문적학습공동체 에듀테크 연수</li>
+        <li>2024 덕은한강중 교사워크숍 에듀테크 연수</li>
+        <li>2024 김포하늘빛중 디지털선도학교 하이러닝 연수</li>
+        <li>2025 하성고 전문적학습공동체 하이러닝 연수</li>
+        <li>2025 권선중 찾아가는 밀착형 하이러닝 활용 역량강화 연수</li>
+        <li>2025 유신고 찾아가는 밀착형 하이러닝 활용 역량강화 연수</li>
+        <li>2025 소현중 전문적학습공동체 하이러닝 연수</li>
+        <li>2025 원천중 전문적학습공동체 하이러닝 연수</li>
+        <li>2025 덕이중 전문적학습공동체 NotebookLM으로 하는 업무효율화 연수</li>
+        <li>2025 김포중 전문적학습공동체 하이러닝, notebookLM 연수</li>
+        <li>2026 일산고 찾아가는학교컨설팅 주강사</li>
+        <li>2026 곡정고 AI 서논술형 평가 연수</li>
+        <li>2026 곡정고 바이브코딩으로 하는 업무효율화 연수</li>
+      </ul>
+    </section>
     
-      <section class="card">
-        <h2><span class="icon">💻</span>에듀테크 연구</h2>
-        <div class="tools-grid">
-          
-          <a class="tool-chip" href="#" target="_blank" rel="noopener">
-            바이브 코딩
-          </a>
-          <a class="tool-chip" href="#" target="_blank" rel="noopener">
-            띵커벨
-          </a>
-          <a class="tool-chip" href="#" target="_blank" rel="noopener">
-            왓퀴즈 AI
-          </a>
-          <a class="tool-chip" href="#" target="_blank" rel="noopener">
-            Goolge Ai studio
-          </a>
-          <a class="tool-chip" href="#" target="_blank" rel="noopener">
-            Claude
-          </a>
-          <a class="tool-chip" href="https://notebooklm.google/" target="_blank" rel="noopener">
-            Notebook LM
-          </a>
-          <a class="tool-chip" href="https://padlet.com/" target="_blank" rel="noopener">
-            Padlet
-          </a>
-          <a class="tool-chip" href="https://tooning.io/" target="_blank" rel="noopener">
-            Tooning
-          </a>
-          <a class="tool-chip" href="https://hi.goe.go.kr/" target="_blank" rel="noopener">
-            경기도교육청 AI 교수학습 플랫폼
-          </a>
-          <a class="tool-chip" href="https://www.notion.com/ko" target="_blank" rel="noopener">
-            Notion
-          </a>
-          <a class="tool-chip" href="https://www.canva.com/ko_kr/" target="_blank" rel="noopener">
-            Canva
-          </a>
-        </div>
-      </section>
+    <section class="section">
+      <h2>에듀테크 연구</h2>
+      <p class="tools-line">
+        <span>바이브 코딩</span><span class="dot">·</span><span>띵커벨</span><span class="dot">·</span><span>왓퀴즈 AI</span><span class="dot">·</span><span>Goolge Ai studio</span><span class="dot">·</span><span>Claude</span><span class="dot">·</span><a href="https://notebooklm.google/" target="_blank" rel="noopener">Notebook LM</a><span class="dot">·</span><a href="https://padlet.com/" target="_blank" rel="noopener">Padlet</a><span class="dot">·</span><a href="https://tooning.io/" target="_blank" rel="noopener">Tooning</a><span class="dot">·</span><a href="https://hi.goe.go.kr/" target="_blank" rel="noopener">경기도교육청 AI 교수학습 플랫폼</a><span class="dot">·</span><a href="https://www.notion.com/ko" target="_blank" rel="noopener">Notion</a><span class="dot">·</span><a href="https://www.canva.com/ko_kr/" target="_blank" rel="noopener">Canva</a>
+      </p>
+    </section>
   </main>
 
   <footer>이 페이지는 Notion 데이터를 바탕으로 자동 생성되었습니다.</footer>
