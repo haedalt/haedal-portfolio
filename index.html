@@ -326,6 +326,7 @@
   .tool:hover{transform:translateY(-4px);border-color:var(--f);
     box-shadow:0 12px 24px -14px var(--f);background:var(--surface)}
   .tool:hover .arrow{transform:translate(2px,-2px);color:var(--f)}
+  .tool.no-link:hover{transform:none;box-shadow:none;border-color:var(--line);background:var(--surface-2)}
   .tools-hint{text-align:center;color:var(--ink-faint);font-size:.82rem;margin-top:18px;
     font-family:"Space Mono",monospace}
 
@@ -430,6 +431,7 @@
         <h2>🏆 수상</h2>
       </div>
       <div class="awards">
+        <!-- NOTION:AWARDS:START (노션 연동이 자동으로 채우는 영역) -->
         <article class="award">
           <span class="medal">🥇</span>
           <div class="aw-body">
@@ -451,6 +453,7 @@
             <div class="txt">경기도 교육청 수업혁신사례연구대회 1등급</div>
           </div>
         </article>
+        <!-- NOTION:AWARDS:END -->
       </div>
     </div>
   </section>
@@ -465,12 +468,14 @@
             <h2>🙋🏻‍♀️ 선도교사</h2>
           </div>
           <div class="chip-list">
+            <!-- NOTION:LEADERS:START (노션 연동이 자동으로 채우는 영역) -->
             <span class="chip"><span class="b"></span>교실혁명 선도교사</span>
             <span class="chip"><span class="b"></span>AIEDAP 마스터교원</span>
             <span class="chip"><span class="b"></span>지식샘터 멘토</span>
             <span class="chip"><span class="b"></span>경기도 디지털 시민교육 선도교사 <span class="yy">2024</span></span>
             <span class="chip"><span class="b"></span>수원 디지털 창의역량 지원단 <span class="yy">2025</span></span>
             <span class="chip"><span class="b"></span>수원 중등 깊이있는 수업나눔 지원단 <span class="yy">2026</span></span>
+            <!-- NOTION:LEADERS:END -->
           </div>
         </div>
         <div>
@@ -479,11 +484,13 @@
             <h2>📒 연구회</h2>
           </div>
           <div class="group-list">
+            <!-- NOTION:GROUPS:START (노션 연동이 자동으로 채우는 영역) -->
             <div class="group"><span class="ico">🌊</span><span class="t">고양 에듀테크 연구회</span><span class="yy">2022–2024</span></div>
             <div class="group"><span class="ico">💡</span><span class="t">경기도 하이러닝 연구회</span></div>
             <div class="group"><span class="ico">🌱</span><span class="t">교사성장학교 3기</span></div>
             <div class="group"><span class="ico">🤖</span><span class="t">경기도 AI 디지털 아카데미 전문가 과정</span><span class="yy">2026</span></div>
             <div class="group"><span class="ico">🔬</span><span class="t">경기도 도단위 수업탐구공동체</span></div>
+            <!-- NOTION:GROUPS:END -->
           </div>
         </div>
       </div>
@@ -500,8 +507,8 @@
       </div>
       <div class="partners">
         <!-- NOTION:PARTNERS:START (노션 연동이 자동으로 채우는 영역) -->
-        <article class="partner"><div class="pt-top"><span class="pt-name">✅️</span></div><span class="pt-role">교사성장학교 3기</span></article>
-        <article class="partner"><div class="pt-top"><span class="pt-name">✅️</span></div><span class="pt-role">왓퀴즈AI 앰버서더 2기</span></article>
+        <article class="partner"><div class="pt-top"><span class="pt-name">교사성장학교</span></div><span class="pt-role">3기</span></article>
+        <article class="partner"><div class="pt-top"><span class="pt-name">왓퀴즈AI</span></div><span class="pt-role">앰버서더 2기</span></article>
         <!-- NOTION:PARTNERS:END -->
       </div>
     </div>
@@ -607,6 +614,7 @@
 
   /* ---- edtech tool links ---- */
   var TOOLS=[
+    /* NOTION:TOOLS:START (노션 연동이 자동으로 채우는 영역) */
     {name:"바이브 코딩",url:"https://www.anthropic.com/claude-code"},
     {name:"띵커벨",url:"https://www.tkbell.co.kr"},
     {name:"왓퀴즈 AI",url:"https://whatquiz.co.kr"},
@@ -618,15 +626,18 @@
     {name:"경기도교육청 AI 교수학습 플랫폼",url:"https://hi.goe.go.kr"},
     {name:"Notion",url:"https://www.notion.so"},
     {name:"Canva",url:"https://www.canva.com"}
+    /* NOTION:TOOLS:END */
   ];
   var COLORS=["var(--aqua)","var(--coral)","var(--sun)","var(--kelp)","var(--aqua-deep)"];
   var wrap=document.getElementById("toolGrid");
   TOOLS.forEach(function(t,i){
-    var a=document.createElement("a");
-    a.className="tool";a.href=t.url;a.target="_blank";a.rel="noopener";
-    a.style.setProperty("--f",COLORS[i%COLORS.length]);
-    a.innerHTML='<span>'+t.name+'</span><span class="arrow" aria-hidden="true">↗</span>';
-    wrap.appendChild(a);
+    var el=document.createElement(t.url?"a":"span");
+    el.className=t.url?"tool":"tool no-link";
+    if(t.url){el.href=t.url;el.target="_blank";el.rel="noopener";}
+    el.style.setProperty("--f",COLORS[i%COLORS.length]);
+    var label=document.createElement("span");label.textContent=t.name;el.appendChild(label);
+    if(t.url){var ar=document.createElement("span");ar.className="arrow";ar.setAttribute("aria-hidden","true");ar.textContent="↗";el.appendChild(ar);}
+    wrap.appendChild(el);
   });
 
 })();
