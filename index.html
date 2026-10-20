@@ -138,7 +138,6 @@
 
   /* ---------- hero ---------- */
   .hero{position:relative;overflow:hidden}
-  .hero-canvas{position:absolute;inset:0;width:100%;height:100%;z-index:0;pointer-events:none}
   .hero-bg{
     position:absolute;inset:0;z-index:0;
     background:
@@ -177,14 +176,22 @@
   .otter-stage .hero-avatar{width:100%;height:100%;object-fit:contain;display:block;
     filter:drop-shadow(0 18px 24px rgba(11,124,120,.22));
     -webkit-mask-image:linear-gradient(to bottom,#000 82%,transparent 100%);
-    mask-image:linear-gradient(to bottom,#000 82%,transparent 100%);
-    animation:bob 5.5s ease-in-out infinite}
-  @media (prefers-reduced-motion:reduce){.otter-stage .hero-avatar{animation:none}}
+    mask-image:linear-gradient(to bottom,#000 82%,transparent 100%)}
+  /* 프로필 주변 과학·에듀테크 이모지 */
+  .orbit{position:absolute;inset:0;pointer-events:none}
+  .orbit span{
+    position:absolute;left:var(--x);top:var(--y);
+    width:clamp(38px,11vw,48px);aspect-ratio:1/1;border-radius:50%;
+    display:grid;place-items:center;font-size:clamp(1.15rem,3.4vw,1.45rem);line-height:1;
+    background:var(--surface);border:1px solid var(--line);box-shadow:var(--card-shadow);
+    translate:-50% -50%;
+    animation:drift 6s ease-in-out infinite;animation-delay:var(--d);
+  }
+  @keyframes drift{0%,100%{transform:translateY(0) rotate(-4deg)}50%{transform:translateY(-8px) rotate(4deg)}}
   .otter-ring{
     position:absolute;inset:6%;border-radius:50%;z-index:-1;
     background:radial-gradient(circle,var(--aqua-glow),transparent 68%);
   }
-  @keyframes bob{0%,100%{transform:translateY(0) rotate(-1.5deg)}50%{transform:translateY(-16px) rotate(1.5deg)}}
   .ripple{position:absolute;left:50%;bottom:2%;width:70%;height:26px;transform:translateX(-50%);
     border-radius:50%;border:2px solid var(--aqua);opacity:.4;
     animation:ripple 4s ease-out infinite}
@@ -342,7 +349,6 @@
 
 <header class="hero" id="top">
   <div class="hero-bg"></div>
-  <canvas class="hero-canvas" id="bubbles" aria-hidden="true"></canvas>
   <div class="wrap">
     <div>
       <span class="role">Chemistry Teacher · EdTech</span>
@@ -357,6 +363,14 @@
     <div class="otter-stage" aria-hidden="true">
       <div class="otter-ring"></div>
       <img class="hero-avatar" src="assets/profile.png" alt="해달쌤 프로필 이미지" width="396" height="419">
+      <div class="orbit">
+        <span style="--x:8%;--y:16%;--d:0s">🧪</span>
+        <span style="--x:90%;--y:12%;--d:-1.2s">⚛️</span>
+        <span style="--x:100%;--y:46%;--d:-2.6s">💻</span>
+        <span style="--x:90%;--y:80%;--d:-3.8s">🤖</span>
+        <span style="--x:4%;--y:78%;--d:-1.8s">🔬</span>
+        <span style="--x:-2%;--y:46%;--d:-4.4s">💡</span>
+      </div>
     </div>
   </div>
 </header>
@@ -577,29 +591,6 @@
     wrap.appendChild(a);
   });
 
-  /* ---- hero bubbles (canvas) ---- */
-  if(!reduce){
-    var cv=document.getElementById("bubbles"), ctx=cv.getContext("2d"), W,H,parts=[];
-    function size(){var r=cv.parentElement.getBoundingClientRect();W=cv.width=r.width;H=cv.height=r.height;}
-    size();window.addEventListener("resize",size);
-    function mk(){return{x:Math.random()*W,y:H+Math.random()*40,r:2+Math.random()*7,
-      s:.3+Math.random()*.9,a:.12+Math.random()*.3,w:Math.random()*Math.PI*2};}
-    for(var i=0;i<38;i++){var p=mk();p.y=Math.random()*H;parts.push(p);}
-    function tick(){
-      ctx.clearRect(0,0,W,H);
-      var acc=getComputedStyle(document.documentElement).getPropertyValue("--aqua").trim()||"#0EA5A0";
-      parts.forEach(function(p){
-        p.y-=p.s;p.w+=0.02;p.x+=Math.sin(p.w)*0.4;
-        if(p.y<-10){Object.assign(p,mk());}
-        ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
-        ctx.fillStyle=acc;ctx.globalAlpha=p.a;ctx.fill();
-        ctx.globalAlpha=p.a*1.4;ctx.beginPath();
-        ctx.arc(p.x-p.r*0.3,p.y-p.r*0.3,p.r*0.35,0,Math.PI*2);ctx.fillStyle="#fff";ctx.fill();
-      });
-      ctx.globalAlpha=1;requestAnimationFrame(tick);
-    }
-    tick();
-  }
 })();
 </script>
 
