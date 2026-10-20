@@ -269,6 +269,21 @@
   .group .t{font-size:1rem}
   .group .yy{margin-left:auto;font-family:"Space Mono",monospace;font-size:.76rem;color:var(--ink-faint);flex:none}
 
+  /* partners */
+  .partners{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:16px}
+  .partner{
+    position:relative;background:var(--surface);border:1px solid var(--line);
+    border-radius:16px;padding:20px 20px 18px;box-shadow:var(--card-shadow);overflow:hidden;
+  }
+  .partner::before{content:"";position:absolute;inset:0 0 auto 0;height:4px;
+    background:linear-gradient(90deg,var(--aqua),var(--aqua-deep))}
+  .partner .pt-top{display:flex;align-items:baseline;justify-content:space-between;gap:10px}
+  .partner .pt-name{font-weight:800;font-size:1.15rem;line-height:1.3}
+  .partner .pt-yr{font-family:"Space Mono",monospace;font-size:.76rem;color:var(--ink-faint);flex:none}
+  .partner .pt-role{display:inline-block;margin-top:10px;padding:5px 12px;border-radius:999px;
+    background:var(--surface-2);color:var(--aqua-deep);font-size:.9rem;font-weight:600}
+  .partners-empty{color:var(--ink-faint)}
+
   /* timeline */
   .filters{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:26px}
   .filt{
@@ -339,6 +354,7 @@
     <nav class="nav" aria-label="섹션">
       <a href="#awards">수상</a>
       <a href="#roles">선도교사</a>
+      <a href="#partners">파트너</a>
       <a href="#lectures">강의</a>
       <a href="#tools">에듀테크</a>
       <a href="#contact" class="hide-sm">협업 요청</a>
@@ -470,6 +486,22 @@
             <div class="group"><span class="ico">🔬</span><span class="t">경기도 도단위 수업탐구공동체</span></div>
           </div>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- partners -->
+  <section id="partners">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="eyebrow">Partners</span>
+        <h2>🤝 파트너 활동</h2>
+        <p>에듀테크 기업과 함께하며 새로운 도구를 먼저 써 보고 교실에 전해요.</p>
+      </div>
+      <div class="partners">
+        <!-- NOTION:PARTNERS:START (노션 연동이 자동으로 채우는 영역) -->
+        <article class="partner"><div class="pt-top"><span class="pt-name">왓퀴즈AI</span><span class="pt-yr">2026</span></div><span class="pt-role">앰버서더 2기</span></article>
+        <!-- NOTION:PARTNERS:END -->
       </div>
     </div>
   </section>
